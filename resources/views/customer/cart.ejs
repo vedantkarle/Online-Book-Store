@@ -1,0 +1,87 @@
+<section class="cart py-16">
+  <% if(user.cart.items.length){ %> 
+  <div class="order container mx-auto xl:w-1/2">
+    <div class="flex items-center border-b border-gray-300 pb-4">
+      <img src="/img/cart-black.png" alt="" />
+      <h1 class="font-bold ml-4 text-2xl">Order Summary</h1>
+    </div>
+    <div class="order-list">
+      <% for(let book of products){ %>
+      <div class="flex items-center my-8 border-b border-gray-300 pb-4">
+        <img class="w-24" src="/img/<%= book.productId.image %>" alt="" />
+        <div class="flex-1 ml-4">
+          <h1><%= book.productId.name %></h1>
+          <span>By - <%= book.productId.author %></span>
+        </div>
+        <span class="flex-1"><%= book.quantity %></span>
+        <span class="font-bold text-lg">₹<%= book.productId.price %></span>
+      </div>
+      <% } %>
+    <div class="text-right py-4">
+      <div>
+        <span class="font-bold text-lg">Total Amount:</span>
+        <span class="amount text-2xl font-bold ml-2">₹<%= totalAmount %></span>
+      </div>
+      <% if(user){ %> 
+      <div>
+        <form class="mt-12" id="payment-form">
+          <div class="relative w-1/2 ml-auto mb-4">
+            <select id="paymentType" name="paymentType" class="block appearance-none w-full bg-white border border-gray-400 p-2 hover:border-gray-500 px-4 py-2 pr-8 leading-tight focus:outline-none focus:shadow-outline">
+              <option value="cod">Cash on delivery</option>
+              <option value="card">Card</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            </div>
+          </div>
+          <input
+            type="text"
+            class="border border-gray-400 p-2 w-1/2 mb-4"
+            placeholder="Phone Number"
+            name="phone"
+            id="phone"
+          />
+          <input
+            type="text"
+            class="border border-gray-400 p-2 w-1/2"
+            placeholder="Address"
+            name="address"
+          />
+          <div class="mt-4">
+            <div id="card-element"></div>
+            <button
+              type="submit"
+              class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6"
+              id="button"
+            >
+              Order Now
+            </button>
+          </div>
+        </form>
+      </div>
+    <% }else{ %> 
+      <a
+        href=""
+        class="inline-block cursor-pointer btn-primary px-6 py-2 rounded-full text-white font-bold mt-6"
+        >Login to continue</a
+      >
+    <% } %> 
+    </div>
+  </div>
+<% }else{ %> 
+  <section class="empty-cart py-16">
+    <div class="container mx-auto text-center">
+      <h1 class="text-3xl font-bold mb-2">Cart Empty 😕</h1>
+      <p class="text-gray-500 text-lg mb-12">
+        You probably haven't ordered yet.<br />To order go to main page
+      </p>
+      <img class="w-2/5 mx-auto" src="img/empty-cart.png" alt="" />
+      <a
+        href="/"
+        class="inline-block px-6 py-2 rounded-full btn-primary text-white font-bold mt-12"
+        >Go back</a
+      >
+    </div>
+  </section>
+<% } %> 
+</section>

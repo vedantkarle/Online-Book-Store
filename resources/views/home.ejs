@@ -1,0 +1,55 @@
+<section class="hero">
+  <div class="container mx-auto flex items-center justify-between py-20 px-10">
+    <div class="w-1/2">
+      <h6 class="text-lg">
+        <em>
+          wanna read something?
+        </em>
+      </h6>
+      <h1 class="text-3xl md:text-6xl font-bold">Dont Wait!</h1>
+      <form action="/cart" method="POST">
+        <button
+          type="submit"
+          class="btn-primary text-white rounded-full px-2 py-1"
+        >
+          Order Now
+        </button>
+      </form>
+    </div>
+    <div class="w-1/2">
+      <img src="/img/pravasi.jpg" alt="pravasi" style="width: 360px;" />
+    </div>
+  </div>
+</section>
+<section class="menu container mx-auto py-8">
+  <h1 class="text-xl font-bold mb-8">All Books</h1>
+  <div class="flex justify-around books-container">
+    <% for(let book of books){ %>
+    <div class="w-64">
+      <img class="h-40 mb-4 mx-auto" src="/img/<%= book.image %>" alt="" />
+      <div class="text-center">
+        <h2 class="mb-4 text-lg"><%= book.name %></h2>
+        <span class="status py-1 px-4 rounded-full uppercase text-xs"
+          >By - <%= book.author %>
+        </span>
+
+        <div class="flex items-center justify-around mt-6">
+          <span class="font-bold text-lg">₹<%= book.price %></span>
+          <form action="/cart" method="POST">
+            <input type="hidden" name="bookId" value="<%= book._id %>" />
+            <button type="submit" class="add-to-cart rounded-full px-2 py-1">
+              + Add to Cart
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% } %>
+</section>
+<footer class="w-full text-center border-t border-grey p-4 pin-b">
+  &copy; Made by
+  <a href="https://www.linkedin.com/in/vedantkarle/" class="text-blue-600"
+    >Vedant Karle</a
+  >
+</footer>
